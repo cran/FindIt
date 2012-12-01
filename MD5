@@ -1,0 +1,12 @@
+8ab12b12e5e81f5384c7c1c502286c32 *ChangeLog
+2a600c55cdd5bf44032d9d0a39db249f *DESCRIPTION
+95933c9326be671fcdb37e0457286d65 *NAMESPACE
+4bbc306e1b760146c8ea5b893343fcc4 *R/SVMHet.R
+0144ca7e659c5640fffd6fca2382d838 *data/GerberGreen.tab.gz
+9def6774941d8afca696949b51db8dcb *data/LaLonde.tab.gz
+285a2e37c4987250db34eeaacaecee66 *data/datalist
+1f3b8a4a821f6dcaf35602580b785311 *man/FindIt.Rd
+19e75f1b3e0e2fb7ffee8003afe08c8a *man/GerberGreen.Rd
+52aaa442b07610c8561ca06ef4ac9568 *man/LaLonde.Rd
+0b6c57999a80f55e3a8c316d72da638c *man/MakeAllWay.Rd
+84a8d85c60950623a561abdc0c859325 *man/MakeTwoWay.Rd
