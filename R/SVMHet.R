@@ -26,7 +26,7 @@ scale.func.2<-function(x) {x2<-x
 
 #####################################################
 
-FindIt<-function(y,X.c, treat ,type="single", rescale.c=FALSE, search.lambdas=TRUE,lambdas=NULL,wts=1,scale.c=1,scale.t=1,n.highlow=10){
+FindIt<-function(y,X.c, treat ,type="single", rescale.c=FALSE, search.lambdas=TRUE,lambdas=NULL,wts=1,scale.c=1,scale.t=1,n.highlow=10,fit.glmnet=TRUE){
 	
 	if(type%in%c("single","multiple")==F){
 		print("Type must be either single or multiple")
@@ -71,7 +71,7 @@ FindIt<-function(y,X.c, treat ,type="single", rescale.c=FALSE, search.lambdas=TR
 	
 	
 	if(search.lambdas==T) lambdas<-search.lambda(y,X.c,X.t)
-	A<-SVM.func(y,X.c[,-1],X.t,lambdas[1],lambdas[2])
+	A<-SVM.func(y,X.c[,-1],X.t,lambdas[1],lambdas[2],fit.glmnet=fit.glmnet)
 
 
 	#Find ten highest and lowest	
@@ -299,7 +299,7 @@ maketwoway<-function(X, wts=1,center=T){
 }
 
 #####################################################
-SVM.func<-function(y,X.c,X.t,lambda.c,lambda.t,wts=1){
+SVM.func<-function(y,X.c,X.t,lambda.c,lambda.t,wts=1,fit.glmnet=fit.glmnet){
 
 	n<-length(y)
 	X<-X2<-cbind(X.c,X.t)
@@ -326,15 +326,20 @@ SVM.func<-function(y,X.c,X.t,lambda.c,lambda.t,wts=1){
 		for(beta.run in 1:100){
 			X.new.2<-apply(X.new[which.use,],MARGIN=2,FUN=function(x) x-mean(x))
 			X.new.2<-apply(X.new.2,MARGIN=2,FUN=function(x) if(length(unique(x))==1) rnorm(sum(which.use)) else x)
-			glmnet.1<-glmnet(X.new.2,y[which.use]-mean(y[which.use]),family="gaussian",lambda=c(5,4,3,2,seq(1.5,1,-.1)),standardize=F)
+			if(fit.glmnet==TRUE)
+			{
+				glmnet.1<-glmnet(X.new.2,y[which.use]-mean(y[which.use]),family="gaussian",lambda=c(5,4,3,2,seq(1.5,1,-.1)),standardize=F)
+				beta.new[-1]<-as.vector(glmnet.1$beta[,10])
+			} else {
 			#This was the old L1 optimizer.
-			#lasso1<-lars(X.new.2,(y[which.use]-mean(y[which.use])),max.steps=dim(X)[2]+2,normalize=F,type="lasso",eps=0)
-			#beta.new[-1]<-as.vector(predict(lasso1,s=1,type="coef",mode="lambda")$coef)
-			beta.new[-1]<-as.vector(glmnet.1$beta[,10])
-			#if(log(sum(which.use))/2*sum(beta.new[-1]!=0)>.9*sum(which.use)) 
-			#	beta.new[-1]<-as.vector(predict(lasso1,s=min(c(floor(.9*sum(which.use)*2/log(n)),
-			#	dim(X.new)[2]*.8)),type="coef",mode="step")$coef)
-			#beta.curr<-.5*beta.new+.5*beta.curr
+			lasso1<-lars(X.new.2,(y[which.use]-mean(y[which.use])),max.steps=dim(X)[2]+2,normalize=F,type="lasso",eps=0)
+			beta.new[-1]<-as.vector(predict(lasso1,s=1,type="coef",mode="lambda")$coef)
+			if(log(sum(which.use))/2*sum(beta.new[-1]!=0)>.9*sum(which.use)) 
+				beta.new[-1]<-as.vector(predict(lasso1,s=min(c(floor(.9*sum(which.use)*2/log(n)),
+				dim(X.new)[2]*.8)),type="coef",mode="step")$coef)
+			}
+			beta.curr<-.5*beta.new+.5*beta.curr
+		
 			beta.new[1]<-mean(y[which.use])-mean(X.new[which.use,]%*%beta.new[-1])
 			run.diff<-(mean((beta.new[-1]-beta.curr[-1])^2)/sum(beta.new[-1]^2+1e-10))
 			if(run.diff<1e-6) break

@@ -1,3 +1,4 @@
 importFrom(glmnet, glmnet)
+importFrom(lars,lars)
 export(FindIt, summary.FindIt, highlow, maketwoway, makeallway)
 

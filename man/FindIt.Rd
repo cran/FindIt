@@ -9,7 +9,7 @@
 }
 \usage{
 	  FindIt(y,X.c, treat ,type="single", rescale.c=FALSE, search.lambdas=TRUE,
-	  lambdas=NULL, wts=1, scale.c=1, scale.t=1, n.highlow=10)
+	  lambdas=NULL, wts=1, scale.c=1, scale.t=1, n.highlow=10, fit.glmnet=TRUE)
 }
 \arguments{
   \item{y}{A vector of outcomes that takes values of +1 or -1.}
@@ -23,7 +23,7 @@
   \item{scale.c}{A set of weights for recaling the pre-treatment covariates. \code{maketwoway} is useful for generating these.}
   \item{scale.t}{A set of scaling weights for the treatment covariates.}
   \item{n.highlow}{When type is "single," returns the indices for observations with the highest and lowest treatment effect estimates.}
-
+  \item{fit.glmnet}{Whether to fit using the coordinate descent method in glmnet (TRUE) or the regularization path method of LARS (FALSE).}
 }
 \details{Implements the alternating line search algorithm for estimating the tuning parameters, as described in Imai and Ratkovic (2012).}
 \value{
@@ -77,12 +77,12 @@ attach(LaLonde)
 
 
 	#Run to find the LASSO parameters
-	#F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=TRUE) #Run to find the LASSO parameters
-	#F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=F, scale.c=X2$scale.X, search.lambdas=TRUE, wts=wts.extrap)
+	F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=TRUE, fit.glmnet=FALSE) #Run to find the LASSO parameters
+	F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=F, scale.c=X2$scale.X, search.lambdas=TRUE, wts=wts.extrap, fit.glmnet=FALSE)
 	
 	#Fit with uncovered lambda parameters.
-	F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=FALSE,lambdas=c(-4.000 ,-4.127) )
-	F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=FALSE, scale.c=X2$scale.X, search.lambdas=FALSE, lambdas=c( -5.9295, -4.6500), wts=wts.extrap)
+	#F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=FALSE,lambdas=c(-4.000 ,-4.127) )
+	#F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=FALSE, scale.c=X2$scale.X, #search.lambdas=FALSE, lambdas=c( -5.9295, -4.6500), wts=wts.extrap)
 
 	#Returns a summary of coefficients and model fit.
 	summary(F1)
@@ -123,10 +123,10 @@ data(GerberGreen)
 	X<-maketwoway(X.orig,center=T)
 
 	#Run to search for lambdas.
-	#F3<-FindIt(y=y, X.c=X$X, treat=X.t, type="multiple", rescale.c=FALSE , scale.c=X$s, search.lambdas=TRUE)
+	F3<-FindIt(y=y, X.c=X$X, treat=X.t, type="multiple", rescale.c=FALSE , scale.c=X$s, search.lambdas=TRUE,fit.glmnet=FALSE)
 	
 	#Fit, given selected lambdas.
-	F3<-FindIt(y=y,X.c=X$X, treat=X.t, type="multiple", rescale.c=FALSE, scale.c=X$s, search.lambdas=FALSE, lambda=c(-9.9265,-6.6245))
+	#F3<-FindIt(y=y,X.c=X$X, treat=X.t, type="multiple", rescale.c=FALSE, scale.c=X$s, search.lambdas=FALSE, #lambda=c(-9.9265,-6.6245))
 
 	#Returns coefficient estimates.
 	summary(F3)
