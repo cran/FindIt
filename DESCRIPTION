@@ -1,6 +1,6 @@
 Package: FindIt
-Version: 0.2
-Date: 2013-01-25
+Version: 0.3
+Date: 2013-01-31
 Title: R Package for Finding Heterogeneous Treatment Effects
 Author: Marc Ratkovic <ratkovic@princeton.edu>, Kosuke Imai
         <kimai@princeton.edu>,
@@ -23,6 +23,6 @@ Description: FindIt is an R package that implements the heterogeneous
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
-Packaged: 2013-01-25 01:19:39 UTC; ratkovic
+Packaged: 2013-02-01 03:41:40 UTC; ratkovic
 Repository: CRAN
-Date/Publication: 2013-01-25 07:53:46
+Date/Publication: 2013-02-01 07:53:25

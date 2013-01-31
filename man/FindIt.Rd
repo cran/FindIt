@@ -48,7 +48,7 @@
 %\seealso{\link{summary.FindIt}}
 
 \examples{
-\dontrun{	
+
 ###These examples reproduce the results in Imai and Ratkovic (forthcoming).
 	
 ###
@@ -77,12 +77,12 @@ attach(LaLonde)
 
 
 	#Run to find the LASSO parameters
-	F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=TRUE, fit.glmnet=FALSE) #Run to find the LASSO parameters
-	F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=F, scale.c=X2$scale.X, search.lambdas=TRUE, wts=wts.extrap, fit.glmnet=FALSE)
+	#F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=TRUE, fit.glmnet=TRUE) #Run to find the LASSO parameters
+	#F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=F, scale.c=X2$scale.X, search.lambdas=TRUE, wts=wts.extrap, fit.glmnet=TRUE)
 	
 	#Fit with uncovered lambda parameters.
-	#F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=FALSE,lambdas=c(-4.000 ,-4.127) )
-	#F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=FALSE, scale.c=X2$scale.X, #search.lambdas=FALSE, lambdas=c( -5.9295, -4.6500), wts=wts.extrap)
+	F1<-FindIt(y,X.c=X$X,treat, scale.c=X$scale.X, search.lambdas=FALSE,lambdas=c(-4.000 ,-4.127),fit.glmnet=TRUE )
+	F2<-FindIt(y=y, X.c=X2$X, treat=treat, type="single", rescale.c=FALSE, scale.c=X2$scale.X, search.lambdas=FALSE, lambdas=c( -5.9295, -4.6500), wts=wts.extrap)
 
 	#Returns a summary of coefficients and model fit.
 	summary(F1)
@@ -97,7 +97,7 @@ attach(LaLonde)
 	
 detach(LaLonde)
 
-
+\dontrun{	
 ###
 ### Example: heterogeneous effect estimation in the New Haven Get-Out-the-Vote Experiment
 ###

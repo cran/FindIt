@@ -1,11 +1,11 @@
-c3265fd923c6370e6a88befb98774338 *ChangeLog
-e9caaf6b38299747b34d08b6c42b7230 *DESCRIPTION
+de623c831b2f6609ebf6135fa0f723ab *ChangeLog
+78ab2fdb01d0b19c0bc9673ae396566b *DESCRIPTION
 38d4e8e6c13e10de80cc8d29868c63fb *NAMESPACE
-f792a1033ffe1cb429a0830df7261638 *R/SVMHet.R
+7c4e14c74472a2958008f37cfd2f6e72 *R/SVMHet.R
 0144ca7e659c5640fffd6fca2382d838 *data/GerberGreen.tab.gz
 9def6774941d8afca696949b51db8dcb *data/LaLonde.tab.gz
 285a2e37c4987250db34eeaacaecee66 *data/datalist
-a526baf2dee783f47e8954db3d193b5a *man/FindIt.Rd
+808958910ad14d6a1909c62b6758976f *man/FindIt.Rd
 19e75f1b3e0e2fb7ffee8003afe08c8a *man/GerberGreen.Rd
 52aaa442b07610c8561ca06ef4ac9568 *man/LaLonde.Rd
 0b6c57999a80f55e3a8c316d72da638c *man/MakeAllWay.Rd

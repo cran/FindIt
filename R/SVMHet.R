@@ -70,7 +70,7 @@ FindIt<-function(y,X.c, treat ,type="single", rescale.c=FALSE, search.lambdas=TR
 	}
 	
 	
-	if(search.lambdas==T) lambdas<-search.lambda(y,X.c,X.t)
+	if(search.lambdas==T) lambdas<-search.lambda(y,X.c,X.t,fit.glmnet=fit.glmnet)
 	A<-SVM.func(y,X.c[,-1],X.t,lambdas[1],lambdas[2],fit.glmnet=fit.glmnet)
 
 
@@ -299,7 +299,7 @@ maketwoway<-function(X, wts=1,center=T){
 }
 
 #####################################################
-SVM.func<-function(y,X.c,X.t,lambda.c,lambda.t,wts=1,fit.glmnet=fit.glmnet){
+SVM.func<-function(y,X.c,X.t,lambda.c,lambda.t,wts=1,fit.glmnet){
 
 	n<-length(y)
 	X<-X2<-cbind(X.c,X.t)
@@ -387,11 +387,11 @@ SVM.func<-function(y,X.c,X.t,lambda.c,lambda.t,wts=1,fit.glmnet=fit.glmnet){
 #####################################################
 
 
-	search.lambda<-function(y=y,X.c=X.c,X.t=X.t){
+	search.lambda<-function(y=y,X.c=X.c,X.t=X.t,fit.glmnet){
 
-	lambda.find<-function(lambda) as.numeric(SVM.func(y,X.c,X.t,lambda[1],lambda[2])$loss)
-	lambda.c.find<-function(lambda) as.numeric(SVM.func(y,X.c,X.t,lambda,lambda.t)$loss)
-	lambda.t.find<-function(lambda) as.numeric(SVM.func(y,X.c,X.t,lambda.c,lambda)$loss)
+	lambda.find<-function(lambda) as.numeric(SVM.func(y,X.c,X.t,lambda[1],lambda[2,fit.glmnet=fit.glmnet])$loss)
+	lambda.c.find<-function(lambda) as.numeric(SVM.func(y,X.c,X.t,lambda,lambda.t,fit.glmnet=fit.glmnet)$loss)
+	lambda.t.find<-function(lambda) as.numeric(SVM.func(y,X.c,X.t,lambda.c,lambda,fit.glmnet=fit.glmnet)$loss)
 	lambda.c.old<-lambda.t.old<-999
 
 	lambda.c.seek<-seq(-15,10,1)
