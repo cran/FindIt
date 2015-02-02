@@ -1,4 +1,8 @@
 importFrom(glmnet, glmnet)
 importFrom(lars,lars)
-export(FindIt, summary.FindIt, highlow, maketwoway, makeallway)
+importFrom(Matrix, Matrix,cBind)
+export(FindIt, summary.FindIt, predict.FindIt, plot.PredictFindIt, maketwoway, makeallway)
 
+S3method(summary, FindIt)
+S3method(predict, FindIt)
+S3method(plot, PredictFindIt)

@@ -1,13 +1,11 @@
 Package: FindIt
-Version: 0.3
-Date: 2013-01-31
-Title: R Package for Finding Heterogeneous Treatment Effects
-Author: Marc Ratkovic <ratkovic@princeton.edu>, Kosuke Imai
-        <kimai@princeton.edu>,
-Maintainer: Marc Ratkovic <ratkovic@princeton.edu>
-Depends: R (>= 2.15.0), glmnet, lars
-Imports: glmnet, lars
-Description: FindIt is an R package that implements the heterogeneous
+Version: 0.4
+Date: 2015-02-02
+Title: Finding Heterogeneous Treatment Effects
+Author: Naoki Egami <naoki.egami5@gmail.com>, Marc Ratkovic <ratkovic@princeton.edu>, Kosuke Imai <kimai@princeton.edu>,
+Maintainer: Naoki Egami <naoki.egami5@gmail.com>
+Depends: R (>= 2.15.0), glmnet, lars, Matrix
+Description: FindIt implements the heterogeneous
         treatment effect estimation procedure proposed by Imai and
         Ratkovic (2013).  The proposed method is applicable, for
         example, when selecting a small number of most (or least)
@@ -23,6 +21,7 @@ Description: FindIt is an R package that implements the heterogeneous
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
-Packaged: 2013-02-01 03:41:40 UTC; ratkovic
 Repository: CRAN
-Date/Publication: 2013-02-01 07:53:25
+NeedsCompilation: no
+Packaged: 2015-02-07 18:08:36 UTC; naokiegami
+Date/Publication: 2015-02-08 00:31:16
