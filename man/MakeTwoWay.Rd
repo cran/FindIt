@@ -19,10 +19,10 @@ frame.meanPre, predict = FALSE)
   Threshold to drop correlated columns.
 }
   \item{frame.meanPre}{
-  The argument to use when \code{maketwoway} is called within \code{predict}.
+  An argument to use when \code{maketwoway} is called within \code{predict.FindIt}.
 }
   \item{predict}{
-  The argument to use when \code{maketwoway} is called within \code{predict}.
+  An argument to use when \code{maketwoway} is called within \code{predict.FindIt}.
 }
 }
 \details{Useful for constructing a matrix for \code{FindIt}.  Takes a matrix and returns a matrix of two-way interactions.  A named matrix with an intercept, all two-way interactions and square terms are returned.  If \code{center=TRUE}, interactions are formed by (1) centering, (2) scaling to sd 1, and (3) interacting.  
@@ -32,7 +32,6 @@ Non-sensible interactions, such as interacting dummy variables for male and fema
   \item{X}{A matrix with all linear terms, squared terms, and two-way interactions from the original matrix.}
   \item{scale.X}{A vector of weights for reutrning X to its original scale.}
 }
-
 
 \author{Naoki Egami, Marc Ratkovic and Kosuke Imai.}
 

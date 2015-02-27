@@ -1,7 +1,7 @@
 importFrom(glmnet, glmnet)
 importFrom(lars,lars)
 importFrom(Matrix, Matrix,cBind)
-export(FindIt, summary.FindIt, predict.FindIt, plot.PredictFindIt, maketwoway, makeallway)
+export(FindIt, summary.FindIt, predict.FindIt, plot.PredictFindIt, maketwoway, makeallway, INT)
 
 S3method(summary, FindIt)
 S3method(predict, FindIt)

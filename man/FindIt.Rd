@@ -1,234 +1,230 @@
 \name{FindIt}
 \alias{FindIt}
 \alias{summary.FindIt}
-
-
 \title{FindIt for Estimating Heterogeneous Treatment Effects}
 \description{
-  \code{FindIt} takes a binary or continuous outcome and a set of pre-treatment covariates, and returns a model with the most predictive treatment-covariate interactions returned.
+  \code{FindIt} returns a model with the most predictive treatment-treatment interactions or treatment-covariate interactions.
 }
 \usage{
-FindIt(model.treat, model.main, model.int, data = NULL, search.lambdas = TRUE,
-lambdas = NULL, wts = 1, scale.c = 1, scale.int = 1, fit.glmnet = TRUE,
-make.twoway = TRUE, make.allway = TRUE, reference.main = NULL, type = "binary",
-treat.type = "multiple", threshold = 0.999999, make.reference = TRUE, nway = 2)
+FindIt(model.treat, model.main, model.int,data = NULL,
+       type = "binary", treat.type = "multiple", nway,	
+       search.lambdas = TRUE, lambdas = NULL,
+       make.twoway = TRUE, make.allway = TRUE,	
+       wts = 1, scale.c = 1, scale.int = 1, fit.glmnet = TRUE, 
+       make.reference = TRUE,reference.main = NULL,threshold = 0.999999)
 }
 \arguments{
-  \item{model.treat}{The formula that specifies outcome and treatment variables.}
-  \item{model.main}{The formula that specifies pre-treatment covariates.}
-  \item{model.int}{The formula specifying pre-treatment covariates that are interacted with treatment assignments when \code{treat.type="single"}.}	
-  \item{data}{an optional data frame, list or environment (or object
+  \item{model.treat}{A formula that specifies outcome and treatment variables.}
+  \item{model.main}{An optional formula that specifies pre-treatment covariates to be adjusted.}
+  \item{model.int}{A formula specifying pre-treatment covariates to be interacted with treatment assignments when \code{treat.type="single"}.}	
+  \item{data}{An optional data frame, list or environment (or object
               coercible by 'as.data.frame' to a data frame) containing the
               variables in the model.  If not found in 'data', the
               variables are taken from 'environment(formula)', typically
-              the environment from which 'lm' is called.}
-
-  \item{search.lambdas}{Whether to search for the tuning parameters for the LASSO constraints.  If FALSE, \code{lambdas} must be supplied.}
-  \item{lambdas}{Tuning parameters to be given to \code{FindIt}; only used if \code{search.lambdas=FALSE}}	
-  \item{wts}{An optional set of scaling weights. The default is 1.}
-  \item{scale.c}{A set of weights for recaling the pre-treatment covariates. \code{maketwoway} is useful for generating these.}
-  \item{scale.int}{A set of weights for recaling the covariates to be interacted with treatment variables. \code{maketwoway} is useful for generating these.}
-  \item{fit.glmnet}{Whether to fit using the coordinate descent method in glmnet (TRUE) or the regularization path method of LARS (FALSE).}
+              the environment from which 'FindIt' is called.}
+  \item{type}{"binary" for a binary outcome variable, which needs to be \code{integer} class; "continuous" for a continuous outcome variable.}
+  \item{treat.type}{"single" for interactions between a single treatment variable, which needs to be \code{integer} class, and multiple pre-treatment covariates specified with \code{model.int}; "multiple" is used when treatment-treatment interactions are of interest and \code{treat} is a matrix of multiple treatments.}
+  \item{nway}{
+  An argument passed to \code{makeallway} when \code{treat.type="multiple"}. \code{FindIt} generates treatment-treatment interactions up to the order specified with this argument. In general, it is recommended to use the number of factorial treatments. The current version covers up to four way interactions.
+}
+  \item{search.lambdas}{Whether to search for the tuning parameters for the LASSO constraints. If \code{FALSE}, \code{lambdas} must be supplied.}
+  \item{lambdas}{Tuning parameters to be given to \code{FindIt}; only used if \code{search.lambdas=FALSE}.}	
   \item{make.twoway}{
-  If \code{make.twoway=TRUE}, maketwoway automatically works within \code{FindIt}.
+  If \code{make.twoway=TRUE}, all possible two-way interactions for the pre-treatment covariates specified in \code{model.main} and \code{model.int} are generated within \code{FindIt}. The default is set to be \code{TRUE}.
 }
   \item{make.allway}{
-  If \code{make.allway=TRUE}, makeallway automatically works within \code{FindIt}.
+  If \code{make.allway=TRUE}, all possible treatment-treatment interactions for multiple treatments are generated when \code{treat.type="multiple"}. Interactions of the order up to the value of \code{nway} is computed. 
+}
+  \item{wts}{An optional set of scaling weights. The default is 1.}
+  \item{scale.c}{A set of weights for recaling the pre-treatment covariates; only used if \code{make.twoway=FALSE}. \code{maketwoway} is useful for generating these.}
+  \item{scale.int}{A set of weights for recaling the covariates to be interacted with treatment variables ; only used if \code{make.twoway=FALSE}. \code{maketwoway} is useful for generating these.}
+  \item{fit.glmnet}{Whether to fit using the coordinate descent method in glmnet (TRUE) or the regularization path method of LARS (FALSE).}
+  \item{make.reference}{
+  Whether to make a reference matrix to check which columns are dropped when \code{makeallway=TRUE}.
 }
   \item{reference.main}{
   If \code{make.allway=FALSE} and researchers generate a matrix of all possible interactions between factorial treatments, \code{reference} from \code{makeallway} function is better to be passed to \code{FindIt} through this argument.
 }
-  \item{type}{"binary" for binary outcome variables; 
-              "continuous" for continuous outcome variables.}
-  \item{treat.type}{"single" for interactions between a single variable and multiple covariates; "multiple" if \code{treat} is a matrix of multiple treatments.}
   \item{threshold}{
-  Threshold to drop correlated columns when \code{makeallway} is used.
+  An argument passed to \code{makeallway} when \code{treat.type="multiple"}. Threshold to drop correlated columns when \code{makeallway} is used.
 }
-  \item{make.reference}{
-  Whether to make a reference matrix to check which columns are dropped when \code{makeallway=TRUE}.
-}
-  \item{nway}{
-  The argument passed to \code{makeallway}. In general, it is recommended to use the number of factorial treatments. The current version covers up to four way interactions.
 }
 
-
-
-
-
-}
 \details{Implements the alternating line search algorithm for estimating the tuning parameters, as described in Imai and Ratkovic (2013).}
 \value{
-  \item{coefs}{A named vector of coefficients}
-  \item{coefs.orig}{Coefficients on the original scale, if scale.c and scale.t was used}
-  \item{fit}{The fitted values on an SVM scale}
+  \item{coefs}{A named vector of scaled coefficients}
+  \item{coefs.orig}{A vector of coefficients on the original scale, if scale.c and scale.t was used}
+  \item{fit}{Fitted values on an SVM scale}
   \item{names.out}{Names of the coefficients}
-  \item{y}{The vector of observed outcomes}
-  \item{X.c}{Matrix of pre-treatment covariates}
-  \item{X.t}{Matrix of treatments or treatment-covariate interactions}
+  \item{y}{A vector of observed outcomes}
+  \item{X.c}{A matrix of pre-treatment covariates to be adjusted}
+  \item{X.t}{A matrix of treatments and treatment-treatment interactions, or treatment-covariate interactions}
   \item{GCV}{GCV statistic at the minimum}
-  \item{ATE}{For a single treatment, the estimated ATE.  For multiple treatments, the estimated ATE for each unique treatment combination}
+  \item{ATE}{When \code{treat.type="single"}, the estimated ATE. When \code{treat.type="multiple"}, the estimated treatment effect of each unique treatment combination}
   \item{lambdas}{Tuning parameters used for the fit}
   \item{reference}{When \code{treat.type="multiple"}, after making all interaction terms, columns with no variation or columns perfectly correlated with one of other columns are automatically dropped. \code{reference} shows which columns are kept and dropped.}
 }
-\references{Imai, Kosuke and Marc Ratkovic. 2013.  ``Estimating Treatment Effect Heterogeneity in Randomized Program Evaluation.'' Annals of Applied Statistics. \url{http://imai.princeton.edu/research/files/svm.pdf}}
+\references{Imai, Kosuke and Marc Ratkovic. 2013.  ``Estimating Treatment Effect Heterogeneity in Randomized Program Evaluation.'' Annals of Applied Statistics, Vol.7, No.1(March), pp. 443-470. \url{http://imai.princeton.edu/research/files/svm.pdf}
+
+Egami, Naoki and Kosuke Imai. 2015. ``Causal Interaction in High-Dimension.'' Working paper. \url{http://imai.princeton.edu/research/files/int.pdf}
+}
 
 \author{Naoki Egami, Marc Ratkovic and Kosuke Imai.}
 
-%\seealso{\link{summary.FindIt, predict.FindIt}}
+%\seealso{\link{summary.FindIt, predict.FindIt, INT}}
 
 \examples{
 
-### Example: heterogeneous effect estimation in the National Supported Work Study Data
-
-
-## Load the LaLonde data
+################################################### 
+## Example 1: Treatment-Covariate Interaction
+################################################### 
 data(LaLonde)
-attach(LaLonde)
 
-y <- re78>re75 
+## The model includes a treatment variable, 
+## nine covariates to be interacted with the treatment variable,
+## and the same nine covariates to be adjusted.
 
-## Generate independent varables.
-white <- (black==0&hisp==0)
-log.re75 <- log(1+re75)
-u75 <- re75==0
-
-## Generate pre-treatment covariates.
-## The same covariates are interacted with treatment variables.
-X.orig <- cbind(age,educ,black,hisp,white,marr,nodegr,log.re75,u75)
-## Compute weights.
-wts.extrap <- psid.wts/mean(psid.wts)
-## Make the data frame.
-data.single <- as.data.frame(cbind(y, treat, X.orig))
-
+\dontrun{
 
 ## Run to find the LASSO parameters
-## F1  <-FindIt(model.treat= y ~ treat,
-##              model.main= ~ age+educ+black+hisp+white+
-##              marr+nodegr+log.re75+u75,
-##              model.int= ~ age+educ+black+hisp+white+
-##              marr+nodegr+log.re75+u75,
-##              data = data.single,             
-##              search.lambdas=TRUE,
-##              fit.glmnet=TRUE,
-##              type="binary",
-##              treat.type="single") 
-## With weights.
-## F2  <-FindIt(model.treat= y ~ treat,
-##              model.main= ~ age+educ+black+hisp+white+
-##              marr+nodegr+log.re75+u75,
-##              model.int= ~ age+educ+black+hisp+white+
-##              marr+nodegr+log.re75+u75,
-##              data = data.single, 
-## 	     wts = wts.extrap,            
-##              search.lambdas=TRUE,
-##              fit.glmnet=TRUE,
-##              type="binary",
-##              treat.type="single") 
-
-## Fit with uncovered lambda parameters.
-F1  <-FindIt(model.treat= y ~ treat,
+F1  <-FindIt(model.treat= outcome ~ treat,
              model.main= ~ age+educ+black+hisp+white+
              marr+nodegr+log.re75+u75,
              model.int= ~ age+educ+black+hisp+white+
              marr+nodegr+log.re75+u75,
-             data = data.single, 
-	     lambdas =c(-3.8760,-4.0025),            
-             search.lambdas=FALSE,
-             fit.glmnet=TRUE,
+             data = LaLonde,  
              type="binary",
              treat.type="single") 
+}
 
-## With weights.
-## F2  <-FindIt(model.treat= y ~ treat,
-##              model.main= ~ age+educ+black+hisp+white+
-##              marr+nodegr+log.re75+u75,
-##              model.int= ~ age+educ+black+hisp+white+
-##              marr+nodegr+log.re75+u75,
-##              data = data.single, 
-##              wts = wts.extrap,
-##              lambdas=c(-7.376,-6.000),	            
-##              search.lambdas=FALSE,
-##              fit.glmnet=TRUE,
-##              type="binary",
-##              treat.type="single") 
+## Fit with uncovered lambda parameters.
+F1  <-FindIt(model.treat= outcome ~ treat,
+             model.main= ~ age+educ+black+hisp+white+
+             marr+nodegr+log.re75+u75,
+             model.int= ~ age+educ+black+hisp+white+
+             marr+nodegr+log.re75+u75,
+             data = LaLonde, 
+             type="binary",
+             treat.type="single",
+             search.lambdas=FALSE,
+             lambdas = c(-3.8760,-4.0025) )
 
-## Returns a summary of coefficients and model fit.
 summary(F1)
-## summary(F2)
 
 ## Returns all the estimated treatment effects. 
 pred1 <- predict(F1)
 ## Top10
-pred1$data[1:10,]
+head(pred1$data, n=10)
 ## Bottom 10
-pred1$data[713:722,]
+tail(pred1$data ,n=10)
 
 ## Visualize all the estimated treatment effects.
-## plot(pred1)
+\dontrun{
+plot(pred1)
+}
 
-detach(LaLonde)
-	
-### Example: heterogeneous effect estimation in the New Haven Get-Out-the-Vote Experiment
-###
+################################################### 
+## Example 2: Treatment-Treatment Interaction
+################################################### 
+
 \dontrun{
 data(GerberGreen)
-Data1 <- GerberGreen
-## Subset to single family households
-Data1<-subset(Data1,persons==1)
-attach(Data1)
 
-## Make matrix of treatments. 
-X.lin <- cbind(persngrp,phnscrpt,mailings,appeal)
-
-## Generate outcome variable and matrix of pre-treatment covariates.
-y <- voted98
-X.orig <- cbind(age,majorpty,vote96.1,vote96.0)
+## The model includes four factorial treatments and 
+## all two, three, four-way interactions between them.
+## Four pre-treatment covariates are adjusted.
 
 ## Run to search for lambdas.
-## F.3<- FindIt(model.treat= y2 ~ X.lin,
-##                 nway=4,
-##                 model.main= ~ X.orig,
-##                 make.allway=TRUE,
-##                 treat.type="multiple",
-##                 type="binary",
-##                 search.lambdas=TRUE)
+F2<- FindIt(model.treat= voted98 ~ persngrp+phnscrpt+mailings+appeal,
+             nway=4,
+             model.main= ~ age+majorpty+vote96.1+vote96.0,
+             data = GerberGreen,
+             type="binary",
+             treat.type="multiple")
 
 ## Fit, given selected lambdas.
-F3<- FindIt(model.treat= y ~ X.lin,
+F2<- FindIt(model.treat= voted98 ~ persngrp+phnscrpt+mailings+appeal,
              nway=4,
-             model.main= ~ X.orig,
-             make.allway=TRUE,
-             treat.type="multiple",
+             model.main= ~ age+majorpty+vote96.1+vote96.0,
+             data = GerberGreen,
              type="binary",
+             treat.type="multiple",
              search.lambdas=FALSE,
- 	     lambdas=c(-15.000,-6.237))
-
-## You also can use makeallway outside FindIt
-## X.t.0 <- makeallway(X.lin,nway=4)$Final
-## colnames.t <- colnames(X.t.0)
-## names.keep <- c("persngrp_1",paste("mailings_",1:3,sep=""), paste("phnscrpt_",1:6,sep=""))
-## keeps <- unique(unlist(sapply(names.keep,F=function(x) grep(x,colnames.t))))
-## X.t <- X.t.0[,keeps]
-## rm(X.t.0)
-## F.3<- FindIt(model.treat= y ~ X.t,
-##              nway=4,
-##              model.main= ~ X.orig,
-##              make.allway=FALSE,
-##              treat.type="multiple",
-##              type="binary",
-##              search.lambdas=TRUE)
+             lambdas=c(-15.000,-6.237))
 
 ## Returns coefficient estimates.
-summary(F3)
+summary(F2)
 
-## Returns predicted values for each treatment combination.
-pred3 <- predict(F3,unique=TRUE)
+## Returns predicted values for unique treatment combinations.
+pred2 <- predict(F2,unique=TRUE)
 ## Top 10
-pred3$data[1:10,]
+head(pred2$data, n=10)
 ## Bottom 10
-pred3$data[63:72,]
+tail(pred2$data, n=10)
 
 ## Visualize predicted values for each treatment combination.
-## plot(pred3)
+plot(pred2)
 }
+
+################################################### 
+## Example 3: Conjoint Analysis. Causal Interaction.
+################################################### 
+data(Immigration)
+
+\dontrun{
+
+## The SVM classifier with a lasso constraint is estimated.
+## The model includes all three-way and two-way interactions as 
+## well as main effects of five factorial treatments.
+
+## Run to search for lambdas.
+F.conjoint<- FindIt(model.treat= outcome ~
+                    Education+Gender+Origin+Experience+Plans,
+                    nway=3,
+                    data = Immigration,
+                    type="binary",
+                    treat.type="multiple")
+
+## Make the full factorial design matrix as the target population. 
+full <- full.FindIt(F.conjoint)
+
+## Compute the predicted potential outcomes for the target population.
+Unifdata <- predict(F.conjoint,newdata=full,sort=FALSE)$data
+}
+## load pre-computed F.conjoint and Unifdata
+data(F.conjoint)
+data(Unifdata)
+
+## Compute AMTEs, ATCEs, and AMTIEs
+
+## Range of each factor interaction.
+## The range of the AMTEs for all factors
+compare1 <- INT(F.conjoint,target.data=Unifdata,compare=TRUE,order=1)
+compare1
+
+## The range of the two-way AMTIEs for all two-way factor interactions
+compare2 <- INT(F.conjoint,target.data=Unifdata,compare=TRUE,order=2)
+compare2
+
+\dontrun{
+## The range of the three-way AMTIEs for all three-way factor interactions
+compare3 <- INT(F.conjoint,target.data=Unifdata,compare=TRUE,order=3)
+compare3
+}
+
+## Compute AMTIEs within factor interactions.
+## Origin x Experience
+out.OP <- INT(F.conjoint,target.data=Unifdata,
+              column=c("Origin","Experience"),
+              base=c("India","No.job"), order=2)
+out.OP
+
+\dontrun{
+## Education x Gender x Origin
+out.EGO <- INT(F.conjoint,target.data=Unifdata,
+               column=c("Education","Gender","Origin"),
+               base=c("No.formal","female","India"), order=3)
+out.EGO
+}
+
 }

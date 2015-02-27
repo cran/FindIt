@@ -10,16 +10,15 @@
 wts = 1, unique = FALSE, ...)
 }
 \arguments{
-  \item{object}{An output from \code{FindIt}.}
-  \item{newdata}{An optional data frame in which to look for variables with which to predict.
-                 If omitted, the data used in \code{FindIt} is used.}
+  \item{object}{An output object from \code{FindIt}.}
+  \item{newdata}{An optional data frame in which to look for variables with which to predict. If omitted, the data used in \code{FindIt} is used.}
   \item{sort}{Whether to sort samples according to estimated treatment effects.}
-  \item{decreasing}{When \code{sort=TRUE}, whether to sort samples in descending order or not.}
+  \item{decreasing}{When \code{sort=TRUE}, whether to sort the output in descending order or not.}
   \item{wts}{Weights.
 }
-  \item{unique}{If \code{unique=TRUE}, \code{predict} returns unique samples.}
+  \item{unique}{If \code{unique=TRUE}, \code{predict} returns estimated treatment effects or predicted outcomes for unique samples.}
   \item{\dots}{
-	Further arguments passed to or from other methods.	
+	further arguments passed to or from other methods.	
 }
 }
 \details{Useful for computing estimated treatment effects or predicted outcomes for each treatment combination. By using \code{newdata}, researchers can compute them for any samples.  
@@ -27,7 +26,6 @@ wts = 1, unique = FALSE, ...)
 \value{
   \item{data}{A matrix of estimated treatment effects when \code{treat.type="single"} and predicted outcomes for each treatment combination when \code{treat.type="multiple"}.} 
 }
-
 
 \author{Naoki Egami, Marc Ratkovic and Kosuke Imai.}
 

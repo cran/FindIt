@@ -7,17 +7,23 @@ Plot estimated treatment effects or predicted outcomes for each treatment combin
 Plot estimated treatment effects when \code{treat.type="single"} and predicted outcomes for each treatment combination when \code{treat.type="multiple"}.
 }
 \usage{ 
-\method{plot}{PredictFindIt}(x, labels = "index", ...)
+\method{plot}{PredictFindIt}(x,main,xlab,ylab, ...)
 }
 \arguments{
   \item{x}{
-  Output from \code{predict.FindIt}.
+  output from \code{predict.FindIt}.
 }
-  \item{labels}{
-  Arguments passed to plot.
+  \item{main}{
+  the argument specifying the main title of the plot.
+}
+  \item{xlab}{
+  the argument specifying the name of x axis.
+}
+  \item{ylab}{
+  the argument specifying the name of y axis.
 }
   \item{\dots}{
-  Further arguments passed to or from other methods.
+  further arguments passed to or from other methods.
 }
 }
 \details{
