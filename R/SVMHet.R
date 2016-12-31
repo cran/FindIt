@@ -257,7 +257,8 @@ FindIt <- function(model.treat, model.main,model.int,data=NULL,
         ## Make X.t
         ## I changed X.c to X.int        
         if(treat.type == "single") {
-            X.t<-cbind(treat*1e4,(treat>0)*X.int[,-1])
+            treat.temp <- as.numeric(treat>0)
+            X.t<-cbind(treat*1e4,treat.temp*X.int[,-1])
             X.t[treat!=0,-1]<-apply(X.t[treat!=0,-1],2, FUN=function(x) x-mean(x))
             ## This X.t is used.            
             colnames(X.t)<-c("treat",paste("treat",colnames(X.int)[-1],sep=":"))

@@ -6,8 +6,7 @@
   estimated treatment effects when \code{treat.type="single"} and
   predicted outcomes for each treatment combination when \code{treat.type="multiple"}.}
 \usage{
-\method{predict}{FindIt}(object, newdata, sort = TRUE, decreasing = TRUE,
-wts = 1, unique = FALSE, ...)
+\method{predict}{FindIt}(object, newdata, sort = TRUE, decreasing = TRUE,wts = 1, unique = FALSE, ...)
 }
 \arguments{
   \item{object}{An output object from \code{FindIt}.}
