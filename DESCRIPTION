@@ -1,6 +1,6 @@
 Package: FindIt
-Version: 1.1
-Date: 2017-08-08
+Version: 1.1.1
+Date: 2017-08-23
 Title: Finding Heterogeneous Treatment Effects
 Author: Naoki Egami <negami@princeton.edu>, Marc Ratkovic <ratkovic@princeton.edu>, Kosuke Imai <kimai@princeton.edu>,
 Maintainer: Naoki Egami <negami@princeton.edu>
@@ -29,7 +29,7 @@ LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 Repository: CRAN
-Packaged: 2017-08-14 15:20:17 UTC; negami
-Date/Publication: 2017-08-14 18:33:07 UTC
+Packaged: 2017-08-24 19:08:40 UTC; negami
+Date/Publication: 2017-08-24 20:51:32 UTC
 RoxygenNote: 6.0.1
 NeedsCompilation: yes

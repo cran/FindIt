@@ -345,7 +345,7 @@ CausalANOVA <- function(formula, int2.formula=NULL, int3.formula=NULL,
     fit <- c(fit, main.formula=main.formula, int2.formula=int2.formula, int3.formula=int3.formula)
     
     if(select.prob==TRUE){
-        stab.fit <- stab.CausalANOVA(fit,cluster=cluster,boot=boot)
+        stab.fit <- stab.CausalANOVA(fit,cluster=cluster,boot=boot,seed=seed)
         output <- list("fit"=fit, "stab.fit"=stab.fit)
         class(output) <- c("CausalANOVA","stab","list")
     }else{

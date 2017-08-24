@@ -1,6 +1,6 @@
-7b2f84c8140a5c115ccd4a7ac60f101c *DESCRIPTION
+0df860570045c3674de71e64f23941a1 *DESCRIPTION
 ae0e4fcdc18a24594b456b2c202c108e *NAMESPACE
-5aa61c3621830b6c762e4b114c16d18b *R/CausalANOVA.R
+9724c5ef614c9fe5d5f3fa8538fcf43b *R/CausalANOVA.R
 edd7f55bef23753a1725d0d7f06eb9c4 *R/CausalANOVAFit.R
 47716e1a35c03f29ab5a26f6fcee7bd6 *R/CoefExtract.R
 439b4c8112e0dafe3b8196b184b91fa8 *R/Collapsing.R
@@ -29,9 +29,9 @@ a7d216846895c09768780a7c18710b9c *R/glinternet.cv_modified.r
 7fd265b8177fd569ff25ba6df8dd12fe *R/plot.PredictEffect.R
 c9dcdf1f38db813b60a62e8a2f49a9e7 *R/plot.cv.CausalANOVA.R
 7412d8198e0bfca3adf9294720f47063 *R/predict.FindIt.R
-7af8b71196b10262f06ccd685a9a8108 *R/rangeCausalANOVAFit.R
-201db2d3cd8ba4be8a83b608f7c96622 *R/stab.CausalANOVA.R
-abeff6ffd5c761abed1e410c0bd323ed *R/summary.CausalANOVA.R
+3b19b5d11ae548467ce703dbf8ee65dc *R/rangeCausalANOVAFit.R
+0a9444b7d513750a4d9511e9dfa54f63 *R/stab.CausalANOVA.R
+3d59a92b6727d18b9732a79784046102 *R/summary.CausalANOVA.R
 3d66b21233a05e94e78f894a576d0967 *R/summary.FindIt.R
 4d42a9feb1575ab292f0a5afa6c2a71f *R/test.CausalANOVA.R
 d506058e3ca3ce81b3de237f0b494083 *data/Carlson.rdata
