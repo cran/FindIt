@@ -1,12 +1,13 @@
 Package: FindIt
-Version: 1.1.1
-Date: 2017-08-23
+Version: 1.1.2
+Date: 2017-09-13
 Title: Finding Heterogeneous Treatment Effects
 Author: Naoki Egami <negami@princeton.edu>, Marc Ratkovic <ratkovic@princeton.edu>, Kosuke Imai <kimai@princeton.edu>,
 Maintainer: Naoki Egami <negami@princeton.edu>
 Depends: R (>= 3.1.0), arm
 Imports: glmnet, lars, Matrix, quadprog, ggplot2, glinternet, igraph,
         sandwich, lmtest, stats, graphics, utils
+Suggests: testthat
 Description: The heterogeneous treatment effect estimation procedure 
         proposed by Imai and Ratkovic (2013)<DOI: 10.1214/12-AOAS593>.  
         The proposed method is applicable, for
@@ -29,7 +30,7 @@ LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 Repository: CRAN
-Packaged: 2017-08-24 19:08:40 UTC; negami
-Date/Publication: 2017-08-24 20:51:32 UTC
+Packaged: 2017-10-05 20:13:08 UTC; negami
+Date/Publication: 2017-10-05 21:00:33 UTC
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
