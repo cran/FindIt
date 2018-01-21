@@ -1,4 +1,4 @@
-3304a8535f6a51654fa520bdef44cf5c *DESCRIPTION
+9ddf6d7f48812dac62d951013dc839d4 *DESCRIPTION
 9a9d1fe7c371f657ba642101fef11e4d *NAMESPACE
 9724c5ef614c9fe5d5f3fa8538fcf43b *R/CausalANOVA.R
 edd7f55bef23753a1725d0d7f06eb9c4 *R/CausalANOVAFit.R
@@ -26,7 +26,7 @@ a7d216846895c09768780a7c18710b9c *R/glinternet.cv_modified.r
 1713245ec54265c762a26a8de693cf7c *R/makeallway.R
 3650ec98e5bcc2ed1d87e272196a95ec *R/maketwoway.R
 10374259d4f0bf249fc96c70dbf81006 *R/plot.CausalANOVA.R
-7fd265b8177fd569ff25ba6df8dd12fe *R/plot.PredictEffect.R
+37c36cf86deca93c8ba8849c112f193f *R/plot.PredictEffect.R
 c9dcdf1f38db813b60a62e8a2f49a9e7 *R/plot.cv.CausalANOVA.R
 7412d8198e0bfca3adf9294720f47063 *R/predict.FindIt.R
 3b19b5d11ae548467ce703dbf8ee65dc *R/rangeCausalANOVAFit.R
@@ -44,12 +44,10 @@ ff7f932a6031e14e407e197c1d3bc672 *man/FindIt.Rd
 6a7a1d45580eae655d566cde40b1be30 *man/GerberGreen.Rd
 eb9434149aa2d4088b87245de4e276d9 *man/LaLonde.Rd
 e59802621eda57cd26c18250e3d3c634 *man/cv.CausalANOVA.Rd
-2c7b1590173764737e932447a2eb80cb *man/plot.PredictFindIt.Rd
+44e6534536f24be2a855cefaa57cd780 *man/plot.PredictFindIt.Rd
 a3fb3b1965c74825f0b0c12b4fc8d203 *man/predict.FindIt.Rd
 e84351aa9142c67d592bd9c2d96e72c1 *man/test.CausalANOVA.Rd
 8290d2e9740414e315237f0d5d4024bb *src/Makevars
 3f43ba79669f9f94ad3807ddbe1d577b *src/inverse.f
 901e88580f0c118fd8fdcef2b7586118 *src/registerDynamicSymbol.c
 a1361b3e7e6a46c72283b8da91019727 *src/solve.f
-9b6195488a42fdab361cbb198d3a3bf3 *tests/testthat.R
-1b44e77ddf399fde64d822f492577e24 *tests/testthat/test-all.R
