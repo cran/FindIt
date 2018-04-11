@@ -1,5 +1,5 @@
-9ddf6d7f48812dac62d951013dc839d4 *DESCRIPTION
-9a9d1fe7c371f657ba642101fef11e4d *NAMESPACE
+d34bd840a02604d32ad5e50287be9092 *DESCRIPTION
+4571edd80a34da5de1a963b3c99f0321 *NAMESPACE
 9724c5ef614c9fe5d5f3fa8538fcf43b *R/CausalANOVA.R
 edd7f55bef23753a1725d0d7f06eb9c4 *R/CausalANOVAFit.R
 47716e1a35c03f29ab5a26f6fcee7bd6 *R/CoefExtract.R
@@ -15,7 +15,7 @@ a63a519b55d322dd6470f92650cc0201 *R/CreateCoef.R
 174f702cc880cd4a8ef09132f4f083a2 *R/Lcombinefunction.R
 b908d4f134d6d80b740e0b595db2f6c3 *R/NoRegularization.R
 d00f402208446072b2591dc6c3ed7b81 *R/PsyConstraintCombine.R
-5ec82ec62423892424fab300a722a5ab *R/SVMHet.R
+df4c70ec95050aea78483d387b537325 *R/SVMHet.R
 fef964bcdabe0659fcea9f760a4660e9 *R/ScreenINT.R
 404b59833a8e64e4685984829f220856 *R/Zcombinefunction.R
 bcd6fdfcb31bd28a9abafd427b338fbb *R/cluster.R
@@ -23,7 +23,7 @@ b626cc9212a07a5de7552fdfa130f1d6 *R/cv.CausalANOVA.R
 a7d216846895c09768780a7c18710b9c *R/glinternet.cv_modified.r
 8e868c86900002269e96d49760200317 *R/indTwo2Three.R
 491046a700c8f952d11f6e30b415815c *R/lengthSlack.R
-1713245ec54265c762a26a8de693cf7c *R/makeallway.R
+be36b694e543ceecf3d2a0b966912977 *R/makeallway.R
 3650ec98e5bcc2ed1d87e272196a95ec *R/maketwoway.R
 10374259d4f0bf249fc96c70dbf81006 *R/plot.CausalANOVA.R
 37c36cf86deca93c8ba8849c112f193f *R/plot.PredictEffect.R
