@@ -39,7 +39,6 @@ predicted outcomes for each treatment combination when
 
 ## See the help page for FindIt() for an example.
 	
-
 }
 \author{
 Naoki Egami, Marc Ratkovic and Kosuke Imai.
